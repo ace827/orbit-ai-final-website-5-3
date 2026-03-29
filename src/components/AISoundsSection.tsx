@@ -15,9 +15,9 @@ const sampleTranscript = [
 ];
 
 const AISoundsSection = () => (
-  <section className="py-24 md:py-32 bg-background">
+  <section className="py-20 md:py-28 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
-      <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-5xl mx-auto">
+      <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
             It Sounds Like a Real Receptionist
@@ -46,7 +46,7 @@ const AISoundsSection = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="bg-card rounded-xl border border-border p-6"
+          className="bg-card rounded-2xl border border-border shadow-card p-6"
         >
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">Sample Conversation</p>
           <div className="space-y-3">

@@ -2,12 +2,10 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => (
-  <section className="relative pt-32 pb-24 md:pt-44 md:pb-36 bg-background overflow-hidden">
+  <section className="relative pt-28 pb-20 md:pt-40 md:pb-28 bg-background overflow-hidden">
     {/* Subtle decorative elements */}
     <div className="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-primary/[0.03] blur-3xl" />
     <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-primary/[0.02] blur-3xl" />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-border/40" />
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full border border-border/20" />
 
     <div className="container mx-auto px-4 lg:px-8 relative z-10">
       <motion.div

@@ -20,13 +20,13 @@ const benefits = [
 ];
 
 const BenefitsSection = () => (
-  <section id="benefits" className="py-24 md:py-32 bg-background">
+  <section id="benefits" className="py-20 md:py-28 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-16"
+        className="text-center max-w-2xl mx-auto mb-14"
       >
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
           Why Home Service Businesses Choose Orbit AI
@@ -36,7 +36,7 @@ const BenefitsSection = () => (
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
         {benefits.map((b, i) => (
           <motion.div
             key={b.title}
@@ -44,7 +44,7 @@ const BenefitsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="text-center"
+            className="rounded-xl border border-border bg-card p-6 text-center hover:shadow-card-hover transition-shadow"
           >
             <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <b.icon size={20} className="text-primary" />

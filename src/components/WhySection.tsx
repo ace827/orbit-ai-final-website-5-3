@@ -9,13 +9,13 @@ const reasons = [
 ];
 
 const WhySection = () => (
-  <section className="py-24 md:py-32 bg-background">
+  <section className="py-20 md:py-28 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-16"
+        className="text-center max-w-2xl mx-auto mb-14"
       >
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
           Real Results for Real Businesses
@@ -31,9 +31,11 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-xl border border-border bg-card p-6"
+            className="rounded-xl border border-border bg-card p-6 hover:shadow-card-hover transition-shadow"
           >
-            <r.icon size={20} className="text-primary mb-3" />
+            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+              <r.icon size={16} className="text-primary" />
+            </div>
             <h3 className="font-heading text-base font-bold text-foreground mb-1">{r.title}</h3>
             <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
           </motion.div>

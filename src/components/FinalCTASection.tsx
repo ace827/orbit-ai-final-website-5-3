@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 const FinalCTASection = () => (
-  <section className="py-24 md:py-32 bg-secondary/50">
+  <section className="py-20 md:py-28 bg-secondary/40">
     <div className="container mx-auto px-4 lg:px-8 text-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}

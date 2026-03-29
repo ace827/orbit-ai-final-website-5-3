@@ -10,7 +10,7 @@ const includes = [
 ];
 
 const PricingSection = () => (
-  <section id="pricing" className="py-24 md:py-32 bg-secondary">
+  <section id="pricing" className="py-24 md:py-32 bg-secondary/50">
     <div className="container mx-auto px-4 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -19,7 +19,7 @@ const PricingSection = () => (
         className="text-center max-w-2xl mx-auto mb-16"
       >
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
-          Simple, <span className="text-gradient">Transparent Pricing</span>
+          Simple, Transparent Pricing
         </h2>
         <p className="text-muted-foreground text-base">One plan. Everything included. No surprises.</p>
       </motion.div>
@@ -31,41 +31,38 @@ const PricingSection = () => (
         transition={{ delay: 0.1 }}
         className="max-w-sm mx-auto"
       >
-        <div className="bg-card rounded-2xl border border-border shadow-card overflow-hidden">
-          <div className="p-8">
-            <h3 className="font-heading text-lg font-bold text-foreground mb-6 text-center">Orbit AI Receptionist</h3>
+        <div className="bg-card rounded-xl border border-border shadow-card p-8">
+          <h3 className="font-heading text-lg font-bold text-foreground mb-6 text-center">Orbit AI Receptionist</h3>
 
-            <div className="flex items-end gap-1 justify-center mb-1">
-              <span className="text-4xl font-heading font-bold text-foreground">$600</span>
-              <span className="text-muted-foreground text-sm mb-1">/month</span>
-            </div>
-            <p className="text-center text-muted-foreground text-xs mb-8">+ $1,800 one-time setup & customization</p>
+          <div className="flex items-end gap-1 justify-center mb-1">
+            <span className="text-4xl font-heading font-bold text-foreground">$600</span>
+            <span className="text-muted-foreground text-sm mb-1">/month</span>
+          </div>
+          <p className="text-center text-muted-foreground text-xs mb-8">+ $1,800 one-time setup & customization</p>
 
-            <ul className="space-y-3 mb-8">
-              {includes.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                  <Check size={16} className="text-accent shrink-0 mt-0.5" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <ul className="space-y-3 mb-8">
+            {includes.map((item) => (
+              <li key={item} className="flex items-start gap-3 text-sm text-foreground">
+                <Check size={16} className="text-primary shrink-0 mt-0.5" />
+                {item}
+              </li>
+            ))}
+          </ul>
 
-            <div className="space-y-3">
-              <a
-                href="#demo"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-primary-foreground transition-all hover:opacity-90"
-                style={{ background: "var(--gradient-cta)" }}
-              >
-                Try the Demo
-                <ArrowRight size={16} />
-              </a>
-              <a
-                href="#pricing"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-xl border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
-              >
-                Book a Call
-              </a>
-            </div>
+          <div className="space-y-3">
+            <a
+              href="#demo"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+            >
+              Try the Demo
+              <ArrowRight size={16} />
+            </a>
+            <a
+              href="#pricing"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+            >
+              Book a Call
+            </a>
           </div>
         </div>
       </motion.div>

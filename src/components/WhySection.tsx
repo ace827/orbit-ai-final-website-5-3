@@ -9,7 +9,7 @@ const reasons = [
 ];
 
 const WhySection = () => (
-  <section className="py-24 md:py-32 bg-hero">
+  <section className="py-24 md:py-32 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -17,10 +17,10 @@ const WhySection = () => (
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-16"
       >
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-hero-foreground mb-3">
-          Real Results for <span className="text-gradient">Real Businesses</span>
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
+          Real Results for Real Businesses
         </h2>
-        <p className="text-hero-muted text-base">Practical outcomes that impact your bottom line.</p>
+        <p className="text-muted-foreground text-base">Practical outcomes that impact your bottom line.</p>
       </motion.div>
 
       <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
@@ -31,11 +31,11 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-2xl border border-hero-foreground/8 bg-hero-foreground/[0.03] p-6"
+            className="rounded-xl border border-border bg-card p-6"
           >
-            <r.icon size={20} className="text-accent mb-3" />
-            <h3 className="font-heading text-base font-bold text-hero-foreground mb-1">{r.title}</h3>
-            <p className="text-hero-muted text-sm leading-relaxed">{r.desc}</p>
+            <r.icon size={20} className="text-primary mb-3" />
+            <h3 className="font-heading text-base font-bold text-foreground mb-1">{r.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
           </motion.div>
         ))}
       </div>

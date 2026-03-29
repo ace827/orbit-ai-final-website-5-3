@@ -9,21 +9,21 @@ const reasons = [
 ];
 
 const WhySection = () => (
-  <section className="py-20 md:py-28 bg-dark-section">
+  <section className="py-24 md:py-32 bg-hero">
     <div className="container mx-auto px-4 lg:px-8">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-14"
+        className="text-center max-w-2xl mx-auto mb-16"
       >
-        <h2 className="font-heading text-3xl md:text-4xl font-bold text-hero-foreground mb-4">
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-hero-foreground mb-3">
           Real Results for <span className="text-gradient">Real Businesses</span>
         </h2>
-        <p className="text-hero-muted text-lg">Practical outcomes that impact your bottom line.</p>
+        <p className="text-hero-muted text-base">Practical outcomes that impact your bottom line.</p>
       </motion.div>
 
-      <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div className="grid sm:grid-cols-2 gap-5 max-w-3xl mx-auto">
         {reasons.map((r, i) => (
           <motion.div
             key={r.title}
@@ -31,10 +31,10 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-2xl border border-hero-foreground/10 bg-hero-foreground/5 p-6 backdrop-blur-sm"
+            className="rounded-2xl border border-hero-foreground/8 bg-hero-foreground/[0.03] p-6"
           >
             <r.icon size={20} className="text-accent mb-3" />
-            <h3 className="font-heading text-lg font-bold text-hero-foreground mb-1">{r.title}</h3>
+            <h3 className="font-heading text-base font-bold text-hero-foreground mb-1">{r.title}</h3>
             <p className="text-hero-muted text-sm leading-relaxed">{r.desc}</p>
           </motion.div>
         ))}

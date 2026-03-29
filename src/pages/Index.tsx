@@ -8,6 +8,7 @@ import IndustriesSection from "@/components/IndustriesSection";
 import AISoundsSection from "@/components/AISoundsSection";
 import PricingSection from "@/components/PricingSection";
 import FAQSection from "@/components/FAQSection";
+import ContactSection from "@/components/ContactSection";
 import FinalCTASection from "@/components/FinalCTASection";
 import Footer from "@/components/Footer";
 
@@ -23,6 +24,7 @@ const Index = () => (
     <AISoundsSection />
     <PricingSection />
     <FAQSection />
+    <ContactSection />
     <FinalCTASection />
     <Footer />
   </>

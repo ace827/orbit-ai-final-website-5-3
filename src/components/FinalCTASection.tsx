@@ -26,10 +26,10 @@ const FinalCTASection = () => (
             <ArrowRight size={16} />
           </a>
           <a
-            href="#pricing"
+            href="#contact"
             className="inline-flex items-center gap-2 rounded-lg border border-border px-7 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
           >
-            Book a Call
+            Contact Us
           </a>
         </div>
       </motion.div>

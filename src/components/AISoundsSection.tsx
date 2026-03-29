@@ -15,12 +15,12 @@ const sampleTranscript = [
 ];
 
 const AISoundsSection = () => (
-  <section className="py-24 md:py-32 bg-secondary">
+  <section className="py-24 md:py-32 bg-background">
     <div className="container mx-auto px-4 lg:px-8">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
-            It Sounds Like a <span className="text-gradient">Real Receptionist</span>
+            It Sounds Like a Real Receptionist
           </h2>
           <p className="text-muted-foreground text-base mb-8">
             No awkward pauses. No hold music. Just a natural, professional conversation.
@@ -46,14 +46,14 @@ const AISoundsSection = () => (
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
-          className="bg-card rounded-2xl border border-border p-6"
+          className="bg-card rounded-xl border border-border p-6"
         >
           <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-4">Sample Conversation</p>
           <div className="space-y-3">
             {sampleTranscript.map((msg, i) => (
               <div key={i} className={`flex ${msg.role === "Orbit AI" ? "justify-start" : "justify-end"}`}>
                 <div
-                  className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+                  className={`max-w-[85%] rounded-xl px-4 py-3 text-sm leading-relaxed ${
                     msg.role === "Orbit AI"
                       ? "bg-primary/5 text-foreground rounded-bl-sm"
                       : "bg-secondary text-foreground rounded-br-sm"

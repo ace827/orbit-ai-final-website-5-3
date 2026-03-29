@@ -29,14 +29,14 @@ const BenefitsSection = () => (
         className="text-center max-w-2xl mx-auto mb-16"
       >
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
-          Why Home Service Businesses <span className="text-gradient">Choose Orbit AI</span>
+          Why Home Service Businesses Choose Orbit AI
         </h2>
         <p className="text-muted-foreground text-base">
           Every missed call is a missed job. Orbit AI makes sure that doesn't happen.
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
         {benefits.map((b, i) => (
           <motion.div
             key={b.title}
@@ -44,9 +44,9 @@ const BenefitsSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.1 }}
-            className="bg-card rounded-2xl p-7 border border-border"
+            className="text-center"
           >
-            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+            <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <b.icon size={20} className="text-primary" />
             </div>
             <h3 className="font-heading text-lg font-bold text-foreground mb-2">{b.title}</h3>

@@ -64,10 +64,10 @@ const PricingSection = () => (
               <ArrowRight size={16} />
             </a>
             <a
-              href="#pricing"
+              href="#contact"
               className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
             >
-              Book a Call
+              Contact Us
             </a>
           </div>
         </div>

@@ -7,7 +7,7 @@ const DemoSection = () => {
   const [tab, setTab] = useState<"call" | "talk">("call");
 
   return (
-    <section id="demo" className="py-20 md:py-28 bg-secondary/40">
+    <section id="demo" className="py-20 md:py-28 bg-secondary/40 lg:hidden">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

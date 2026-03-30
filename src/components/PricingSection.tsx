@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Phone, Clock, Shield, Zap } from "lucide-react";
+import { Check, ArrowRight, Clock, Zap, Users, PhoneCall, Headphones, Star } from "lucide-react";
 import { navigateToDemo } from "@/lib/demo-navigation";
 
 const includes = [
@@ -12,11 +12,19 @@ const includes = [
   "Seamless CRM integrations",
 ];
 
-const stats = [
-  { icon: Phone, value: "10,000+", label: "Calls handled monthly" },
-  { icon: Clock, value: "24/7", label: "Always available" },
-  { icon: Shield, value: "99.9%", label: "Uptime guaranteed" },
-  { icon: Zap, value: "<1s", label: "Average response time" },
+const highlights = [
+  { icon: Clock, text: "24/7 availability" },
+  { icon: Zap, text: "Instant response to calls" },
+  { icon: Users, text: "Custom setup for your business" },
+  { icon: PhoneCall, text: "Real-time lead capture" },
+  { icon: Headphones, text: "Works during busy hours and after hours" },
+];
+
+const extras = [
+  "Handles multiple calls at once",
+  "Never misses a lead",
+  "Consistent customer experience",
+  "No need for additional staff",
 ];
 
 const PricingSection = () => (
@@ -88,7 +96,7 @@ const PricingSection = () => (
           </div>
         </motion.div>
 
-        {/* Right side — stats + value props */}
+        {/* Right side — highlights + extras */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -96,47 +104,32 @@ const PricingSection = () => (
           transition={{ delay: 0.2 }}
           className="space-y-6"
         >
-          {/* Stats grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {stats.map(({ icon: Icon, value, label }) => (
-              <div
-                key={label}
-                className="bg-card rounded-xl border border-border p-5 text-center shadow-card"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <Icon size={18} className="text-primary" />
-                </div>
-                <p className="font-heading text-2xl font-bold text-foreground">{value}</p>
-                <p className="text-muted-foreground text-xs mt-1">{label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Money-back guarantee */}
+          {/* Key highlights */}
           <div className="bg-card rounded-xl border border-border p-6 shadow-card">
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <Shield size={18} className="text-primary" />
-              </div>
-              <div>
-                <h4 className="font-heading text-sm font-bold text-foreground mb-1">
-                  30-Day Money-Back Guarantee
-                </h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Try Orbit AI risk-free. If you're not completely satisfied within the first 30 days, we'll refund your setup fee — no questions asked.
-                </p>
-              </div>
-            </div>
+            <h4 className="font-heading text-sm font-bold text-foreground mb-4">What You Get</h4>
+            <ul className="space-y-3.5">
+              {highlights.map(({ icon: Icon, text }) => (
+                <li key={text} className="flex items-center gap-3 text-sm text-foreground">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <Icon size={15} className="text-primary" />
+                  </div>
+                  {text}
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {/* ROI callout */}
-          <div className="bg-primary/5 rounded-xl border border-primary/20 p-6">
-            <h4 className="font-heading text-sm font-bold text-foreground mb-2">
-              The average home service business loses $15,000/year in missed calls.
-            </h4>
-            <p className="text-muted-foreground text-sm leading-relaxed">
-              Orbit AI pays for itself by capturing leads you'd otherwise lose — nights, weekends, and busy hours included.
-            </p>
+          {/* Extra benefits */}
+          <div className="bg-card rounded-xl border border-border p-6 shadow-card">
+            <h4 className="font-heading text-sm font-bold text-foreground mb-4">Why Businesses Choose Orbit</h4>
+            <ul className="space-y-3">
+              {extras.map((item) => (
+                <li key={item} className="flex items-center gap-3 text-sm text-foreground">
+                  <Star size={14} className="text-primary shrink-0" />
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
         </motion.div>
       </div>

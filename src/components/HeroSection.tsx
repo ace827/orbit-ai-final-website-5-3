@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Shield, Clock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import DemoCard from "@/components/DemoCard";
 import {
   DEMO_HIGHLIGHT_EVENT,
   HERO_DEMO_ID,
@@ -10,7 +11,6 @@ import {
 } from "@/lib/demo-navigation";
 
 const HeroSection = () => {
-  const [phone, setPhone] = useState("");
   const [highlight, setHighlight] = useState(false);
 
   useEffect(() => {
@@ -100,54 +100,7 @@ const HeroSection = () => {
             className="hidden lg:block flex-1 max-w-md"
             id={HERO_DEMO_ID}
           >
-            <div
-              className={`bg-card rounded-2xl shadow-card border p-8 transition-all duration-500 ${
-                highlight
-                  ? "border-primary/40 ring-4 ring-primary/10 shadow-card-hover scale-[1.01]"
-                  : "border-border"
-              }`}
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Phone size={18} className="text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold text-foreground">Try Orbit AI Live</h3>
-                  <p className="text-xs text-muted-foreground">Get a demo call in seconds</p>
-                </div>
-              </div>
-
-              <div className="text-left">
-                <label className="text-sm font-medium text-foreground mb-2 block">
-                  Your phone number
-                </label>
-                <input
-                  type="tel"
-                  placeholder="(555) 123-4567"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
-                />
-                <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
-                  Get a Demo Call
-                  <ArrowRight size={16} />
-                </button>
-                <p className="text-muted-foreground text-xs mt-4 text-center">
-                  Enter your phone number and we&apos;ll call you instantly.
-                </p>
-              </div>
-
-              <div className="border-t border-border mt-6 pt-5 flex items-center justify-between text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5">
-                  <Shield size={12} className="text-primary/70" />
-                  No spam, ever
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock size={12} className="text-primary/70" />
-                  Takes 30 seconds
-                </span>
-              </div>
-            </div>
+            <DemoCard highlight={highlight} />
           </motion.div>
         </div>
 

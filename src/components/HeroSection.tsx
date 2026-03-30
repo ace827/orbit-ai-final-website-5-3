@@ -18,47 +18,48 @@ const HeroSection = () => {
 
     const handleHighlight = (event: Event) => {
       const customEvent = event as CustomEvent<DemoHighlightDetail>;
-
       if (customEvent.detail?.targetId !== HERO_DEMO_ID) return;
-
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
-
+      if (timeoutId) window.clearTimeout(timeoutId);
       setHighlight(true);
       timeoutId = window.setTimeout(() => setHighlight(false), 1200);
     };
 
     window.addEventListener(DEMO_HIGHLIGHT_EVENT, handleHighlight as EventListener);
-
     return () => {
       window.removeEventListener(DEMO_HIGHLIGHT_EVENT, handleHighlight as EventListener);
-      if (timeoutId) {
-        window.clearTimeout(timeoutId);
-      }
+      if (timeoutId) window.clearTimeout(timeoutId);
     };
   }, []);
 
   return (
     <section
       id={HERO_SECTION_ID}
-      className="relative min-h-[60vh] lg:min-h-screen flex items-start lg:items-center bg-background overflow-hidden pt-20 pb-12 lg:pt-0 lg:pb-0"
+      className="relative min-h-[60vh] lg:min-h-screen flex items-start lg:items-center overflow-hidden pt-20 pb-12 lg:pt-0 lg:pb-0"
     >
-      <div className="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-primary/[0.03] blur-3xl" />
-      <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-primary/[0.02] blur-3xl" />
+      {/* Decorative background */}
+      <div className="absolute inset-0 bg-gradient-subtle" />
+      <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-primary/[0.04] blur-[100px]" />
+      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.015] blur-[150px]" />
+      <div className="absolute inset-0 bg-dot-pattern opacity-30" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 lg:-mt-12">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="flex-1 text-center lg:text-left"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-1.5 mb-6">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-              <span className="text-muted-foreground text-xs font-medium">AI-Powered Voice Receptionist</span>
-            </div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-1.5 mb-6"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse-glow" />
+              <span className="text-primary text-xs font-semibold">AI-Powered Voice Receptionist</span>
+            </motion.div>
 
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-foreground mb-5">
               Never Miss Another <span className="text-gradient">Customer Call</span>
@@ -75,14 +76,14 @@ const HeroSection = () => {
                   event.preventDefault();
                   navigateToDemo();
                 }}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+                className="group inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow"
               >
                 Try the Live Demo
-                <ArrowRight size={16} />
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#contact"
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+                className="inline-flex items-center gap-2 rounded-lg border border-border px-7 py-3.5 text-sm font-semibold text-foreground hover:bg-secondary hover:border-primary/20 transition-all"
               >
                 Contact Us
               </a>
@@ -96,7 +97,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="hidden lg:block flex-1 max-w-md"
             id={HERO_DEMO_ID}
           >

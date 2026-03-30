@@ -26,14 +26,23 @@ const DemoCard = ({ highlight = false }: DemoCardProps) => {
     setPhone(formatPhone(e.target.value));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (status !== "idle") return;
     if (digits.length !== 10) {
       setError(true);
       return;
     }
     setStatus("calling");
-    setTimeout(() => setStatus("done"), 2000);
+    try {
+      await fetch("https://hook.us2.make.com/8kawapu3b2xentqhp2qx6vn6ej7h0si5", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone: `+1${digits}` }),
+      });
+    } catch {
+      // proceed to done state even if webhook fails
+    }
+    setStatus("done");
   };
 
   return (

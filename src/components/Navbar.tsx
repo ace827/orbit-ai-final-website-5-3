@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, type MouseEvent } from "react";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { navigateToDemo } from "@/lib/demo-navigation";
 
 const navLinks = [
   { label: "Demo", href: "#demo" },
@@ -14,6 +15,12 @@ const navLinks = [
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
+  const handleDemoNavigation = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    setOpen(false);
+    navigateToDemo();
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-14 px-4 lg:px-8">
@@ -23,7 +30,12 @@ const Navbar = () => {
 
         <div className="hidden md:flex items-center gap-7">
           {navLinks.map((l) => (
-            <a key={l.href} href={l.href} className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors">
+            <a
+              key={l.href}
+              href={l.href}
+              onClick={l.href === "#demo" ? handleDemoNavigation : undefined}
+              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
+            >
               {l.label}
             </a>
           ))}
@@ -32,6 +44,7 @@ const Navbar = () => {
         <div className="hidden md:block">
           <a
             href="#demo"
+            onClick={handleDemoNavigation}
             className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
           >
             Try the Live Demo
@@ -53,13 +66,18 @@ const Navbar = () => {
           >
             <div className="flex flex-col gap-3 p-5">
               {navLinks.map((l) => (
-                <a key={l.href} href={l.href} onClick={() => setOpen(false)} className="text-muted-foreground hover:text-foreground text-sm font-medium">
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={l.href === "#demo" ? handleDemoNavigation : () => setOpen(false)}
+                  className="text-muted-foreground hover:text-foreground text-sm font-medium"
+                >
                   {l.label}
                 </a>
               ))}
               <a
                 href="#demo"
-                onClick={() => setOpen(false)}
+                onClick={handleDemoNavigation}
                 className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground mt-2"
               >
                 Try the Live Demo

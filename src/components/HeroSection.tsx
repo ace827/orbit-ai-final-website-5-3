@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Mic } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import {
   DEMO_HIGHLIGHT_EVENT,
   HERO_DEMO_ID,
@@ -11,7 +11,6 @@ import {
 
 const HeroSection = () => {
   const [phone, setPhone] = useState("");
-  const [tab, setTab] = useState<"call" | "talk">("call");
   const [highlight, setHighlight] = useState(false);
 
   useEffect(() => {
@@ -108,65 +107,25 @@ const HeroSection = () => {
                   : "border-border"
               }`}
             >
-              <div className="inline-flex rounded-lg bg-secondary p-1 mb-8 w-full">
-                <button
-                  onClick={() => setTab("call")}
-                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all ${
-                    tab === "call"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Phone size={14} />
-                  Get a Call
+              <div className="text-left">
+                <label className="text-sm font-medium text-foreground mb-2 block">
+                  Your phone number
+                </label>
+                <input
+                  type="tel"
+                  placeholder="(555) 123-4567"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
+                />
+                <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
+                  Get a Demo Call
+                  <ArrowRight size={16} />
                 </button>
-                <button
-                  onClick={() => setTab("talk")}
-                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all ${
-                    tab === "talk"
-                      ? "bg-background text-foreground shadow-sm"
-                      : "text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  <Mic size={14} />
-                  Talk Now
-                </button>
+                <p className="text-muted-foreground text-xs mt-4 text-center">
+                  Enter your phone number and we&apos;ll call you instantly.
+                </p>
               </div>
-
-              {tab === "call" ? (
-                <div className="text-left">
-                  <label className="text-sm font-medium text-foreground mb-2 block">
-                    Your phone number
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="(555) 123-4567"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
-                  />
-                  <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
-                    Get a Demo Call
-                    <ArrowRight size={16} />
-                  </button>
-                  <p className="text-muted-foreground text-xs mt-4 text-center">
-                    Enter your phone number and we&apos;ll call you instantly.
-                  </p>
-                </div>
-              ) : (
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
-                    <Mic size={24} className="text-primary" />
-                  </div>
-                  <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
-                    Start Live Demo
-                    <ArrowRight size={16} />
-                  </button>
-                  <p className="text-muted-foreground text-xs mt-4">
-                    Start a live conversation with the AI in your browser.
-                  </p>
-                </div>
-              )}
 
               <p className="text-muted-foreground/60 text-[11px] mt-3 text-center">
                 Act like you&apos;re a customer calling a home service business.

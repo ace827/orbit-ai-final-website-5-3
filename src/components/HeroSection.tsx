@@ -1,16 +1,33 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Phone } from "lucide-react";
+import { ArrowRight, Phone, Mic } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const HeroSection = () => {
   const [phone, setPhone] = useState("");
+  const [tab, setTab] = useState<"call" | "talk">("call");
+  const [highlight, setHighlight] = useState(false);
+  const demoRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
+
+  const handleDemoClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (!isMobile && demoRef.current) {
+        e.preventDefault();
+        setHighlight(true);
+        setTimeout(() => setHighlight(false), 1200);
+      }
+      // On mobile, default anchor scroll behavior proceeds
+    },
+    [isMobile]
+  );
 
   return (
-    <section className="relative pt-24 pb-16 md:pt-32 md:pb-20 bg-background overflow-hidden">
+    <section className="relative min-h-[60vh] lg:min-h-screen flex items-start lg:items-center bg-background overflow-hidden pt-20 pb-12 lg:pt-0 lg:pb-0">
       <div className="absolute top-20 left-1/4 w-72 h-72 rounded-full bg-primary/[0.03] blur-3xl" />
       <div className="absolute bottom-10 right-1/4 w-96 h-96 rounded-full bg-primary/[0.02] blur-3xl" />
 
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 lg:px-8 relative z-10 lg:-mt-12">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">
           {/* Left — Copy */}
           <motion.div
@@ -36,6 +53,7 @@ const HeroSection = () => {
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8 lg:mb-0">
               <a
                 href="#demo"
+                onClick={handleDemoClick}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
               >
                 Try the Live Demo
@@ -54,40 +72,84 @@ const HeroSection = () => {
             </p>
           </motion.div>
 
-          {/* Right — Demo card (desktop) */}
+          {/* Right — Full Demo card (desktop) */}
           <motion.div
+            ref={demoRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="hidden lg:block flex-1 max-w-md"
             id="demo"
           >
-            <div className="bg-card rounded-2xl shadow-card border border-border p-8">
-              <div className="inline-flex items-center gap-2 mb-6">
-                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                  <Phone size={14} className="text-primary" />
-                </div>
-                <span className="text-sm font-semibold text-foreground">Try It Yourself</span>
+            <div
+              className={`bg-card rounded-2xl shadow-card border p-8 transition-all duration-500 ${
+                highlight
+                  ? "border-primary/60 shadow-[0_0_20px_hsl(var(--primary)/0.15)] scale-[1.02]"
+                  : "border-border"
+              }`}
+            >
+              {/* Toggle */}
+              <div className="inline-flex rounded-lg bg-secondary p-1 mb-6 w-full">
+                <button
+                  onClick={() => setTab("call")}
+                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all ${
+                    tab === "call"
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Phone size={14} />
+                  Get a Call
+                </button>
+                <button
+                  onClick={() => setTab("talk")}
+                  className={`flex-1 inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-all ${
+                    tab === "talk"
+                      ? "bg-background text-foreground shadow-sm"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  <Mic size={14} />
+                  Talk Now
+                </button>
               </div>
 
-              <label className="text-sm font-medium text-foreground mb-2 block">
-                Your phone number
-              </label>
-              <input
-                type="tel"
-                placeholder="(555) 123-4567"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
-              />
-              <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
-                Get a Demo Call
-                <ArrowRight size={16} />
-              </button>
-              <p className="text-muted-foreground text-xs mt-4 text-center">
-                Enter your phone number and we'll call you instantly.
-              </p>
-              <p className="text-muted-foreground/60 text-[11px] mt-2 text-center">
+              {tab === "call" ? (
+                <div className="text-left">
+                  <label className="text-sm font-medium text-foreground mb-2 block">
+                    Your phone number
+                  </label>
+                  <input
+                    type="tel"
+                    placeholder="(555) 123-4567"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
+                  />
+                  <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
+                    Get a Demo Call
+                    <ArrowRight size={16} />
+                  </button>
+                  <p className="text-muted-foreground text-xs mt-4 text-center">
+                    Enter your phone number and we'll call you instantly.
+                  </p>
+                </div>
+              ) : (
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+                    <Mic size={24} className="text-primary" />
+                  </div>
+                  <button className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90">
+                    Start Live Demo
+                    <ArrowRight size={16} />
+                  </button>
+                  <p className="text-muted-foreground text-xs mt-4">
+                    Start a live conversation with the AI in your browser.
+                  </p>
+                </div>
+              )}
+
+              <p className="text-muted-foreground/60 text-[11px] mt-3 text-center">
                 Act like you're a customer calling a home service business.
               </p>
             </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Send, AlertCircle, Mail, Phone, Clock, MessageSquare } from "lucide-react";
+import { ArrowRight, Send, AlertCircle, Zap, Settings, Headphones, Home } from "lucide-react";
 
 const formatPhone = (value: string) => {
   const digits = value.replace(/\D/g, "").slice(0, 10);
@@ -10,41 +10,15 @@ const formatPhone = (value: string) => {
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 };
 
-const contactPoints = [
-  {
-    icon: Mail,
-    title: "Email Us",
-    detail: "hello@useorbit.ai",
-    sub: "We respond within 24 hours",
-  },
-  {
-    icon: Phone,
-    title: "Call Us",
-    detail: "(555) 012-3456",
-    sub: "Mon–Fri, 9am–6pm EST",
-  },
-  {
-    icon: Clock,
-    title: "Quick Setup",
-    detail: "Live in 48 hours",
-    sub: "From first call to fully operational",
-  },
-  {
-    icon: MessageSquare,
-    title: "Dedicated Support",
-    detail: "Personal account manager",
-    sub: "Hands-on help whenever you need it",
-  },
+const supportPoints = [
+  { icon: Zap, title: "Fast setup", sub: "Get up and running quickly" },
+  { icon: Settings, title: "Fully customized to your business", sub: "Tailored to how you operate" },
+  { icon: Headphones, title: "Ongoing support available", sub: "We're here when you need us" },
+  { icon: Home, title: "Built for home service businesses", sub: "Designed for your industry" },
 ];
 
 const ContactSection = () => {
-  const [form, setForm] = useState({
-    name: "",
-    company: "",
-    email: "",
-    phone: "",
-    notes: "",
-  });
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", notes: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -72,10 +46,7 @@ const ContactSection = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const errs = validate();
-    if (Object.keys(errs).length > 0) {
-      setErrors(errs);
-      return;
-    }
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
     setStatus("submitting");
     try {
       const digits = form.phone.replace(/\D/g, "");
@@ -98,9 +69,7 @@ const ContactSection = () => {
 
   const inputClass = (field: string) =>
     `w-full rounded-lg border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 transition ${
-      errors[field]
-        ? "border-destructive ring-2 ring-destructive/20"
-        : "border-border focus:ring-primary/20 focus:border-primary/40"
+      errors[field] ? "border-destructive ring-2 ring-destructive/20" : "border-border focus:ring-primary/20 focus:border-primary/40"
     }`;
 
   return (
@@ -112,16 +81,12 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
-            Get in Touch
-          </h2>
-          <p className="text-muted-foreground text-base">
-            Have questions or ready to get started? We'd love to hear from you.
-          </p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">Get in Touch</h2>
+          <p className="text-muted-foreground text-base">Have questions or ready to get started? We'd love to hear from you.</p>
         </motion.div>
 
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-          {/* Left — contact info cards */}
+          {/* Left — support points */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -129,17 +94,13 @@ const ContactSection = () => {
             transition={{ delay: 0.1 }}
             className="space-y-4"
           >
-            {contactPoints.map(({ icon: Icon, title, detail, sub }) => (
-              <div
-                key={title}
-                className="bg-card rounded-xl border border-border p-5 shadow-card flex items-start gap-4"
-              >
+            {supportPoints.map(({ icon: Icon, title, sub }) => (
+              <div key={title} className="bg-card rounded-xl border border-border p-5 shadow-card flex items-start gap-4">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                   <Icon size={18} className="text-primary" />
                 </div>
                 <div>
                   <h4 className="font-heading text-sm font-bold text-foreground">{title}</h4>
-                  <p className="text-foreground text-sm mt-0.5">{detail}</p>
                   <p className="text-muted-foreground text-xs mt-1">{sub}</p>
                 </div>
               </div>
@@ -159,12 +120,8 @@ const ContactSection = () => {
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
                     <Send size={20} className="text-primary" />
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">
-                    Message Sent
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    Thanks, we'll be in touch shortly.
-                  </p>
+                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">Message Sent</h3>
+                  <p className="text-muted-foreground text-sm">Thanks, we'll be in touch shortly.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -203,11 +160,7 @@ const ContactSection = () => {
                     </div>
                   )}
 
-                  <button
-                    type="submit"
-                    disabled={status === "submitting"}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60"
-                  >
+                  <button type="submit" disabled={status === "submitting"} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60">
                     {status === "submitting" ? "Sending…" : "Get in Touch"}
                     {status !== "submitting" && <ArrowRight size={16} />}
                   </button>

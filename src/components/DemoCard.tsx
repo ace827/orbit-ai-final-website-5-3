@@ -6,12 +6,32 @@ interface DemoCardProps {
   highlight?: boolean;
 }
 
+const formatPhone = (value: string) => {
+  const digits = value.replace(/\D/g, "").slice(0, 10);
+  if (digits.length === 0) return "";
+  if (digits.length <= 3) return `(${digits}`;
+  if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+  return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+};
+
 const DemoCard = ({ highlight = false }: DemoCardProps) => {
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState(false);
   const [status, setStatus] = useState<"idle" | "calling" | "done">("idle");
 
+  const digits = phone.replace(/\D/g, "");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError(false);
+    setPhone(formatPhone(e.target.value));
+  };
+
   const handleSubmit = () => {
-    if (!phone.trim() || status !== "idle") return;
+    if (status !== "idle") return;
+    if (digits.length !== 10) {
+      setError(true);
+      return;
+    }
     setStatus("calling");
     setTimeout(() => setStatus("done"), 2000);
   };
@@ -46,17 +66,37 @@ const DemoCard = ({ highlight = false }: DemoCardProps) => {
             <label className="text-sm font-medium text-foreground mb-2 block">
               Your phone number
             </label>
-            <input
-              type="tel"
-              placeholder="(555) 123-4567"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-              className="w-full rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition mb-4"
-            />
+            <div
+              className={`flex items-center rounded-lg border bg-background transition ${
+                error
+                  ? "border-destructive ring-2 ring-destructive/20"
+                  : "border-border focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary/40"
+              }`}
+            >
+              <span className="pl-4 pr-2 text-sm font-medium text-muted-foreground select-none">
+                +1
+              </span>
+              <input
+                type="tel"
+                placeholder="(555) 123-4567"
+                value={phone}
+                onChange={handleChange}
+                onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                className="w-full bg-transparent px-2 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none"
+              />
+            </div>
+            {error && (
+              <motion.p
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-destructive text-xs mt-1.5"
+              >
+                Please enter a valid 10-digit phone number
+              </motion.p>
+            )}
             <button
               onClick={handleSubmit}
-              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+              className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 mt-4"
             >
               Get a Demo Call
               <ArrowRight size={16} />
@@ -105,6 +145,7 @@ const DemoCard = ({ highlight = false }: DemoCardProps) => {
               onClick={() => {
                 setStatus("idle");
                 setPhone("");
+                setError(false);
               }}
               className="text-xs text-primary font-medium hover:underline mt-1"
             >

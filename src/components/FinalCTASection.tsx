@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { navigateToDemo } from "@/lib/demo-navigation";
 
 const FinalCTASection = () => (
   <section className="py-20 md:py-28 bg-secondary/40">
@@ -20,6 +21,10 @@ const FinalCTASection = () => (
         <div className="flex flex-wrap justify-center gap-3">
           <a
             href="#demo"
+            onClick={(event) => {
+              event.preventDefault();
+              navigateToDemo();
+            }}
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-7 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
           >
             Try the Live Demo

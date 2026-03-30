@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
+import { navigateToDemo } from "@/lib/demo-navigation";
 
 const includes = [
   "Custom AI receptionist trained on your business",
@@ -58,6 +59,10 @@ const PricingSection = () => (
           <div className="space-y-3">
             <a
               href="#demo"
+              onClick={(event) => {
+                event.preventDefault();
+                navigateToDemo();
+              }}
               className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
             >
               Try the Demo

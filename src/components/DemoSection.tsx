@@ -1,13 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Phone, Mic } from "lucide-react";
+import {
+  DEMO_HIGHLIGHT_EVENT,
+  MOBILE_DEMO_ID,
+  type DemoHighlightDetail,
+} from "@/lib/demo-navigation";
 
 const DemoSection = () => {
   const [phone, setPhone] = useState("");
   const [tab, setTab] = useState<"call" | "talk">("call");
+  const [highlight, setHighlight] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+
+    const handleHighlight = (event: Event) => {
+      const customEvent = event as CustomEvent<DemoHighlightDetail>;
+
+      if (customEvent.detail?.targetId !== MOBILE_DEMO_ID) return;
+
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+
+      setHighlight(true);
+      timeoutId = window.setTimeout(() => setHighlight(false), 1200);
+    };
+
+    window.addEventListener(DEMO_HIGHLIGHT_EVENT, handleHighlight as EventListener);
+
+    return () => {
+      window.removeEventListener(DEMO_HIGHLIGHT_EVENT, handleHighlight as EventListener);
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   return (
-    <section id="demo" className="py-20 md:py-28 bg-secondary/40 lg:hidden">
+    <section id={MOBILE_DEMO_ID} className="py-20 md:py-28 bg-secondary/40 lg:hidden">
       <div className="container mx-auto px-4 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -27,8 +59,13 @@ const DemoSection = () => {
             Experience how Orbit AI handles customer calls.
           </p>
 
-          <div className="bg-card rounded-2xl shadow-card border border-border p-8">
-            {/* Toggle */}
+          <div
+            className={`bg-card rounded-2xl shadow-card border p-8 transition-all duration-500 ${
+              highlight
+                ? "border-primary/40 ring-4 ring-primary/10 shadow-card-hover scale-[1.01]"
+                : "border-border"
+            }`}
+          >
             <div className="inline-flex rounded-lg bg-secondary p-1 mb-8">
               <button
                 onClick={() => setTab("call")}
@@ -71,7 +108,7 @@ const DemoSection = () => {
                   <ArrowRight size={16} />
                 </button>
                 <p className="text-muted-foreground text-xs mt-4 text-center">
-                  Enter your phone number and we'll call you instantly.
+                  Enter your phone number and we&apos;ll call you instantly.
                 </p>
               </div>
             ) : (
@@ -90,7 +127,7 @@ const DemoSection = () => {
             )}
 
             <p className="text-muted-foreground/60 text-[11px] mt-3 text-center">
-              Act like you're a customer calling a home service business.
+              Act like you&apos;re a customer calling a home service business.
             </p>
           </div>
         </motion.div>

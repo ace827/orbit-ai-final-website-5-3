@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Send, AlertCircle } from "lucide-react";
+import { ArrowRight, Send, AlertCircle, Mail, Phone, Clock, MessageSquare } from "lucide-react";
 
 const formatPhone = (value: string) => {
   const digits = value.replace(/\D/g, "").slice(0, 10);
@@ -9,6 +9,33 @@ const formatPhone = (value: string) => {
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
 };
+
+const contactPoints = [
+  {
+    icon: Mail,
+    title: "Email Us",
+    detail: "hello@useorbit.ai",
+    sub: "We respond within 24 hours",
+  },
+  {
+    icon: Phone,
+    title: "Call Us",
+    detail: "(555) 012-3456",
+    sub: "Mon–Fri, 9am–6pm EST",
+  },
+  {
+    icon: Clock,
+    title: "Quick Setup",
+    detail: "Live in 48 hours",
+    sub: "From first call to fully operational",
+  },
+  {
+    icon: MessageSquare,
+    title: "Dedicated Support",
+    detail: "Personal account manager",
+    sub: "Hands-on help whenever you need it",
+  },
+];
 
 const ContactSection = () => {
   const [form, setForm] = useState({
@@ -83,77 +110,112 @@ const ContactSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-md mx-auto text-center"
+          className="text-center max-w-2xl mx-auto mb-14"
         >
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
             Get in Touch
           </h2>
-          <p className="text-muted-foreground text-base mb-8">
-            Have questions or ready to get started? Drop us a message.
+          <p className="text-muted-foreground text-base">
+            Have questions or ready to get started? We'd love to hear from you.
           </p>
-
-          <div className="bg-card rounded-2xl shadow-card border border-border p-8 text-left">
-            {status === "success" ? (
-              <div className="text-center py-8">
-                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <Send size={20} className="text-primary" />
-                </div>
-                <h3 className="font-heading text-lg font-bold text-foreground mb-2">
-                  Message Sent
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  Thanks, we'll be in touch shortly.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Name *</label>
-                  <input type="text" name="name" maxLength={100} placeholder="John Smith" value={form.name} onChange={handleChange} className={inputClass("name")} />
-                  {errors.name && <p className="text-destructive text-xs mt-1.5">{errors.name}</p>}
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Company *</label>
-                  <input type="text" name="company" maxLength={100} placeholder="Your Business Name" value={form.company} onChange={handleChange} className={inputClass("company")} />
-                  {errors.company && <p className="text-destructive text-xs mt-1.5">{errors.company}</p>}
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
-                  <input type="email" name="email" maxLength={255} placeholder="john@company.com" value={form.email} onChange={handleChange} className={inputClass("email")} />
-                  {errors.email && <p className="text-destructive text-xs mt-1.5">{errors.email}</p>}
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Phone *</label>
-                  <div className={`flex items-center rounded-lg border bg-background transition ${errors.phone ? "border-destructive ring-2 ring-destructive/20" : "border-border focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary/40"}`}>
-                    <span className="pl-4 pr-2 text-sm font-medium text-muted-foreground select-none">+1</span>
-                    <input type="tel" name="phone" placeholder="(555) 123-4567" value={form.phone} onChange={handleChange} className="w-full bg-transparent px-2 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none" />
-                  </div>
-                  {errors.phone && <p className="text-destructive text-xs mt-1.5">{errors.phone}</p>}
-                </div>
-                <div>
-                  <label className="text-sm font-medium text-foreground mb-1.5 block">Notes</label>
-                  <textarea name="notes" maxLength={1000} rows={3} placeholder="Tell us about your business or questions..." value={form.notes} onChange={handleChange} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition resize-none" />
-                </div>
-
-                {status === "error" && (
-                  <div className="flex items-center gap-2 text-destructive text-sm">
-                    <AlertCircle size={14} />
-                    Something went wrong, please try again.
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === "submitting"}
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60"
-                >
-                  {status === "submitting" ? "Sending…" : "Get in Touch"}
-                  {status !== "submitting" && <ArrowRight size={16} />}
-                </button>
-              </form>
-            )}
-          </div>
         </motion.div>
+
+        <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
+          {/* Left — contact info cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="space-y-4"
+          >
+            {contactPoints.map(({ icon: Icon, title, detail, sub }) => (
+              <div
+                key={title}
+                className="bg-card rounded-xl border border-border p-5 shadow-card flex items-start gap-4"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                  <Icon size={18} className="text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-heading text-sm font-bold text-foreground">{title}</h4>
+                  <p className="text-foreground text-sm mt-0.5">{detail}</p>
+                  <p className="text-muted-foreground text-xs mt-1">{sub}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Right — form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="bg-card rounded-2xl shadow-card border border-border p-8 text-left">
+              {status === "success" ? (
+                <div className="text-center py-8">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <Send size={20} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">
+                    Message Sent
+                  </h3>
+                  <p className="text-muted-foreground text-sm">
+                    Thanks, we'll be in touch shortly.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Name *</label>
+                    <input type="text" name="name" maxLength={100} placeholder="John Smith" value={form.name} onChange={handleChange} className={inputClass("name")} />
+                    {errors.name && <p className="text-destructive text-xs mt-1.5">{errors.name}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Company *</label>
+                    <input type="text" name="company" maxLength={100} placeholder="Your Business Name" value={form.company} onChange={handleChange} className={inputClass("company")} />
+                    {errors.company && <p className="text-destructive text-xs mt-1.5">{errors.company}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Email *</label>
+                    <input type="email" name="email" maxLength={255} placeholder="john@company.com" value={form.email} onChange={handleChange} className={inputClass("email")} />
+                    {errors.email && <p className="text-destructive text-xs mt-1.5">{errors.email}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Phone *</label>
+                    <div className={`flex items-center rounded-lg border bg-background transition ${errors.phone ? "border-destructive ring-2 ring-destructive/20" : "border-border focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary/40"}`}>
+                      <span className="pl-4 pr-2 text-sm font-medium text-muted-foreground select-none">+1</span>
+                      <input type="tel" name="phone" placeholder="(555) 123-4567" value={form.phone} onChange={handleChange} className="w-full bg-transparent px-2 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none" />
+                    </div>
+                    {errors.phone && <p className="text-destructive text-xs mt-1.5">{errors.phone}</p>}
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground mb-1.5 block">Notes</label>
+                    <textarea name="notes" maxLength={1000} rows={3} placeholder="Tell us about your business or questions..." value={form.notes} onChange={handleChange} className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/40 transition resize-none" />
+                  </div>
+
+                  {status === "error" && (
+                    <div className="flex items-center gap-2 text-destructive text-sm">
+                      <AlertCircle size={14} />
+                      Something went wrong, please try again.
+                    </div>
+                  )}
+
+                  <button
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60"
+                  >
+                    {status === "submitting" ? "Sending…" : "Get in Touch"}
+                    {status !== "submitting" && <ArrowRight size={16} />}
+                  </button>
+                </form>
+              )}
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

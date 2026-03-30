@@ -22,10 +22,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/70 backdrop-blur-xl border-b border-border/50">
       <div className="container mx-auto flex items-center justify-between h-14 px-4 lg:px-8">
         <a href="#" className="text-foreground font-heading font-bold text-lg tracking-tight">
-          Orbit <span className="text-primary">AI</span>
+          Orbit <span className="text-gradient">AI</span>
         </a>
 
         <div className="hidden md:flex items-center gap-7">
@@ -34,7 +34,7 @@ const Navbar = () => {
               key={l.href}
               href={l.href}
               onClick={l.href === "#demo" ? handleDemoNavigation : undefined}
-              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors"
+              className="text-muted-foreground hover:text-foreground text-sm font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-primary after:transition-all hover:after:w-full"
             >
               {l.label}
             </a>
@@ -45,7 +45,7 @@ const Navbar = () => {
           <a
             href="#demo"
             onClick={handleDemoNavigation}
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+            className="group inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow"
           >
             Try the Live Demo
           </a>
@@ -62,7 +62,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-t border-border overflow-hidden"
+            className="md:hidden bg-background/95 backdrop-blur-xl border-t border-border/50 overflow-hidden"
           >
             <div className="flex flex-col gap-3 p-5">
               {navLinks.map((l) => (

@@ -30,14 +30,20 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <section id="faq" className="py-20 md:py-28 bg-background">
-    <div className="container mx-auto px-4 lg:px-8">
+  <section id="faq" className="relative py-20 md:py-28 bg-background overflow-hidden">
+    <div className="absolute inset-0 bg-dot-pattern opacity-15" />
+    <div className="absolute top-0 left-0 right-0 section-divider" />
+
+    <div className="container mx-auto px-4 lg:px-8 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-12"
       >
+        <span className="inline-block text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+          FAQ
+        </span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
           Frequently Asked Questions
         </h2>
@@ -49,12 +55,12 @@ const FAQSection = () => (
         viewport={{ once: true }}
         className="max-w-2xl mx-auto"
       >
-        <Accordion type="single" collapsible className="space-y-2">
+        <Accordion type="single" collapsible className="space-y-3">
           {faqs.map((faq, i) => (
             <AccordionItem
               key={i}
               value={`faq-${i}`}
-              className="bg-card border border-border rounded-xl px-6 overflow-hidden"
+              className="bg-card border border-border rounded-2xl px-6 overflow-hidden shadow-card hover:shadow-card-hover transition-shadow"
             >
               <AccordionTrigger className="text-foreground font-heading font-semibold text-left hover:no-underline py-5 text-sm">
                 {faq.q}

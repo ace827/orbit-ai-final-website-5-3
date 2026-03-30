@@ -28,14 +28,21 @@ const extras = [
 ];
 
 const PricingSection = () => (
-  <section id="pricing" className="py-20 md:py-28 bg-secondary/40">
-    <div className="container mx-auto px-4 lg:px-8">
+  <section id="pricing" className="relative py-20 md:py-28 bg-gradient-section overflow-hidden">
+    <div className="absolute top-0 left-0 right-0 section-divider" />
+    <div className="absolute bottom-0 left-0 right-0 section-divider" />
+    <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+
+    <div className="container mx-auto px-4 lg:px-8 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-14"
       >
+        <span className="inline-block text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+          Pricing
+        </span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
           Simple, Transparent Pricing
         </h2>
@@ -50,16 +57,19 @@ const PricingSection = () => (
           viewport={{ once: true }}
           transition={{ delay: 0.1 }}
         >
-          <div className="bg-card rounded-2xl border border-border shadow-card p-8">
+          <div className="bg-card rounded-2xl border border-border shadow-elevated p-8 relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/40 via-primary to-primary/40" />
+
             <div className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse-glow" />
               <span className="text-primary text-xs font-semibold">Most Popular</span>
             </div>
 
             <h3 className="font-heading text-lg font-bold text-foreground mb-6">Orbit AI Receptionist</h3>
 
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-4xl font-heading font-bold text-foreground">$600</span>
-              <span className="text-muted-foreground text-sm mb-1">/month</span>
+              <span className="text-5xl font-heading font-bold text-gradient">$600</span>
+              <span className="text-muted-foreground text-sm mb-1.5">/month</span>
             </div>
             <p className="text-muted-foreground text-xs mb-8">+ $1,800 one-time setup & customization</p>
 
@@ -67,7 +77,9 @@ const PricingSection = () => (
               <ul className="space-y-3">
                 {includes.map((item) => (
                   <li key={item} className="flex items-start gap-3 text-sm text-foreground">
-                    <Check size={16} className="text-primary shrink-0 mt-0.5" />
+                    <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={12} className="text-primary" />
+                    </div>
                     {item}
                   </li>
                 ))}
@@ -81,14 +93,14 @@ const PricingSection = () => (
                   event.preventDefault();
                   navigateToDemo();
                 }}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90"
+                className="group w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow"
               >
                 Try the Demo
-                <ArrowRight size={16} />
+                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#contact"
-                className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-lg border border-border px-6 py-3.5 text-sm font-semibold text-foreground hover:bg-secondary hover:border-primary/20 transition-all"
               >
                 Contact Us
               </a>
@@ -96,7 +108,7 @@ const PricingSection = () => (
           </div>
         </motion.div>
 
-        {/* Right side — highlights + extras */}
+        {/* Right side */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -104,32 +116,36 @@ const PricingSection = () => (
           transition={{ delay: 0.2 }}
           className="space-y-6"
         >
-          {/* Key highlights */}
-          <div className="bg-card rounded-xl border border-border p-6 shadow-card">
-            <h4 className="font-heading text-sm font-bold text-foreground mb-4">What You Get</h4>
-            <ul className="space-y-3.5">
-              {highlights.map(({ icon: Icon, text }) => (
-                <li key={text} className="flex items-center gap-3 text-sm text-foreground">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Icon size={15} className="text-primary" />
-                  </div>
-                  {text}
-                </li>
-              ))}
-            </ul>
+          <div className="bg-card rounded-2xl border border-border p-7 shadow-card relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent" />
+            <div className="relative z-10">
+              <h4 className="font-heading text-sm font-bold text-foreground mb-5">What You Get</h4>
+              <ul className="space-y-4">
+                {highlights.map(({ icon: Icon, text }) => (
+                  <li key={text} className="flex items-center gap-3.5 text-sm text-foreground group">
+                    <div className="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:shadow-glow transition-shadow duration-300">
+                      <Icon size={16} className="text-primary" />
+                    </div>
+                    <span className="font-medium">{text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Extra benefits */}
-          <div className="bg-card rounded-xl border border-border p-6 shadow-card">
-            <h4 className="font-heading text-sm font-bold text-foreground mb-4">Why Businesses Choose Orbit</h4>
-            <ul className="space-y-3">
-              {extras.map((item) => (
-                <li key={item} className="flex items-center gap-3 text-sm text-foreground">
-                  <Star size={14} className="text-primary shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
+          <div className="bg-card rounded-2xl border border-border p-7 shadow-card relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent" />
+            <div className="relative z-10">
+              <h4 className="font-heading text-sm font-bold text-foreground mb-5">Why Businesses Choose Orbit</h4>
+              <ul className="space-y-3.5">
+                {extras.map((item) => (
+                  <li key={item} className="flex items-center gap-3 text-sm text-foreground">
+                    <Star size={14} className="text-primary shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </motion.div>
       </div>

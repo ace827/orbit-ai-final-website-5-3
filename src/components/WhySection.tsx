@@ -9,14 +9,20 @@ const reasons = [
 ];
 
 const WhySection = () => (
-  <section className="py-20 md:py-28 bg-background">
-    <div className="container mx-auto px-4 lg:px-8">
+  <section className="relative py-20 md:py-28 bg-background overflow-hidden">
+    <div className="absolute inset-0 bg-dot-pattern opacity-15" />
+    <div className="absolute top-0 left-0 right-0 section-divider" />
+
+    <div className="container mx-auto px-4 lg:px-8 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-center max-w-2xl mx-auto mb-14"
       >
+        <span className="inline-block text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+          Why Orbit AI
+        </span>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">
           Real Results for Real Businesses
         </h2>
@@ -31,13 +37,16 @@ const WhySection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.08 }}
-            className="rounded-xl border border-border bg-card p-6 hover:shadow-card-hover transition-shadow"
+            className="group rounded-2xl border border-border bg-card p-6 card-hover relative overflow-hidden"
           >
-            <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-              <r.icon size={16} className="text-primary" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative z-10">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mb-3 group-hover:shadow-glow transition-shadow duration-300">
+                <r.icon size={17} className="text-primary" />
+              </div>
+              <h3 className="font-heading text-base font-bold text-foreground mb-1">{r.title}</h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
             </div>
-            <h3 className="font-heading text-base font-bold text-foreground mb-1">{r.title}</h3>
-            <p className="text-muted-foreground text-sm leading-relaxed">{r.desc}</p>
           </motion.div>
         ))}
       </div>

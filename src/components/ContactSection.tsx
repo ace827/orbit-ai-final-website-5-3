@@ -73,20 +73,26 @@ const ContactSection = () => {
     }`;
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-secondary/40">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="contact" className="relative py-20 md:py-28 bg-gradient-section overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 section-divider" />
+      <div className="absolute inset-0 bg-dot-pattern opacity-10" />
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
+          <span className="inline-block text-primary text-xs font-semibold tracking-widest uppercase mb-4">
+            Contact
+          </span>
           <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-3">Get in Touch</h2>
           <p className="text-muted-foreground text-base">Have questions or ready to get started? We'd love to hear from you.</p>
         </motion.div>
 
         <div className="max-w-5xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-          {/* Left — support points */}
+          {/* Left */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -94,16 +100,24 @@ const ContactSection = () => {
             transition={{ delay: 0.1 }}
             className="space-y-4"
           >
-            {supportPoints.map(({ icon: Icon, title, sub }) => (
-              <div key={title} className="bg-card rounded-xl border border-border p-5 shadow-card flex items-start gap-4">
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+            {supportPoints.map(({ icon: Icon, title, sub }, i) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 + i * 0.08 }}
+                className="group bg-card rounded-2xl border border-border p-5 shadow-card card-hover flex items-start gap-4 relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 relative z-10 group-hover:shadow-glow transition-shadow duration-300">
                   <Icon size={18} className="text-primary" />
                 </div>
-                <div>
+                <div className="relative z-10">
                   <h4 className="font-heading text-sm font-bold text-foreground">{title}</h4>
                   <p className="text-muted-foreground text-xs mt-1">{sub}</p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
 
@@ -114,15 +128,21 @@ const ContactSection = () => {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <div className="bg-card rounded-2xl shadow-card border border-border p-8 text-left">
+            <div className="bg-card rounded-2xl shadow-elevated border border-border p-8 text-left relative overflow-hidden">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/40 via-primary to-primary/40" />
+
               {status === "success" ? (
-                <div className="text-center py-8">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <Send size={20} className="text-primary" />
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="text-center py-8"
+                >
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 shadow-glow">
+                    <Send size={22} className="text-primary" />
                   </div>
                   <h3 className="font-heading text-lg font-bold text-foreground mb-2">Message Sent</h3>
                   <p className="text-muted-foreground text-sm">Thanks, we'll be in touch shortly.</p>
-                </div>
+                </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -160,9 +180,9 @@ const ContactSection = () => {
                     </div>
                   )}
 
-                  <button type="submit" disabled={status === "submitting"} className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:opacity-60">
+                  <button type="submit" disabled={status === "submitting"} className="group w-full inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-glow disabled:opacity-60">
                     {status === "submitting" ? "Sending…" : "Get in Touch"}
-                    {status !== "submitting" && <ArrowRight size={16} />}
+                    {status !== "submitting" && <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />}
                   </button>
                 </form>
               )}

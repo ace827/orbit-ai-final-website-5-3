@@ -34,9 +34,9 @@ const RevenueCalculatorSection = () => {
     setResult({
       low,
       high,
-      showRoi: low > 1500,
-      lowMult: Math.round(low / 600),
-      highMult: Math.round(high / 600),
+      showRoi: low > 0,
+      lowMult: Math.max(1, Math.round(low / 600)),
+      highMult: Math.max(1, Math.round(high / 600)),
     });
   };
 
@@ -211,27 +211,15 @@ const RevenueCalculatorSection = () => {
                       Estimated Missed Revenue
                     </div>
 
-                    <div className="grid grid-cols-2 gap-3 sm:gap-5 mb-5">
-                      <div className="rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm p-4 sm:p-5">
-                        <div className="text-[11px] font-semibold tracking-widest uppercase text-muted-foreground mb-1.5">
-                          Low estimate
-                        </div>
-                        <div className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-none tracking-tight tabular-nums whitespace-nowrap">
-                          {formatCurrency(result.low)}
-                        </div>
+                    <div className="rounded-2xl border border-border/60 bg-card/60 backdrop-blur-sm p-5 sm:p-6 mb-5">
+                      <div className="font-heading font-bold text-primary leading-none tracking-tight tabular-nums whitespace-nowrap text-[clamp(1.75rem,6vw,3.5rem)]">
+                        {formatCurrency(result.low)}
+                        <span className="text-foreground/30 mx-1.5 sm:mx-2 font-light">–</span>
+                        {formatCurrency(result.high)}
                       </div>
-                      <div className="rounded-xl border border-primary/30 bg-primary/[0.06] p-4 sm:p-5">
-                        <div className="text-[11px] font-semibold tracking-widest uppercase text-primary/80 mb-1.5">
-                          High estimate
-                        </div>
-                        <div className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-none tracking-tight tabular-nums whitespace-nowrap">
-                          {formatCurrency(result.high)}
-                        </div>
+                      <div className="text-muted-foreground text-sm font-medium mt-3">
+                        Per month · based on a 20–40% conversion estimate
                       </div>
-                    </div>
-
-                    <div className="text-muted-foreground text-sm font-medium">
-                      Per month · based on a 20–40% conversion estimate
                     </div>
 
                     {result.showRoi && (
@@ -239,7 +227,7 @@ const RevenueCalculatorSection = () => {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.15, duration: 0.3 }}
-                        className="mt-6 pt-6 border-t border-border/60 flex flex-wrap items-baseline gap-x-3 gap-y-1"
+                        className="flex flex-wrap items-baseline gap-x-3 gap-y-1"
                       >
                         <div className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight tabular-nums whitespace-nowrap">
                           {result.lowMult}x–{result.highMult}x ROI

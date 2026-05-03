@@ -36,12 +36,8 @@ const HeroSection = () => {
       id={HERO_SECTION_ID}
       className="relative min-h-[60vh] lg:min-h-screen flex items-start lg:items-center overflow-hidden pt-20 pb-12 lg:pt-0 lg:pb-0"
     >
-      {/* Decorative background */}
-      <div className="absolute inset-0 bg-gradient-subtle" />
-      <div className="absolute top-20 left-1/4 w-96 h-96 rounded-full bg-primary/[0.04] blur-[100px]" />
-      <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] rounded-full bg-primary/[0.03] blur-[120px]" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-primary/[0.015] blur-[150px]" />
-      <div className="absolute inset-0 bg-dot-pattern opacity-30" />
+      {/* Solid white background */}
+      <div className="absolute inset-0 bg-white" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10 lg:-mt-12">
         <div className="flex flex-col lg:flex-row lg:items-center lg:gap-16">

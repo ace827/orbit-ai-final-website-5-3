@@ -22,7 +22,7 @@ const Index = () => (
     <BenefitsSection />
     <HowItWorksSection />
     <WhySection />
-    
+    <IndustriesSection />
     <AISoundsSection />
     <PricingSection />
     <FAQSection />

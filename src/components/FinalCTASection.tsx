@@ -38,12 +38,6 @@ const FinalCTASection = () => (
             Try the Live Demo
             <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
           </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-7 py-3.5 text-sm font-semibold text-foreground hover:bg-secondary hover:border-primary/20 transition-all"
-          >
-            Contact Us
-          </a>
         </div>
       </motion.div>
     </div>

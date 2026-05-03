@@ -26,7 +26,7 @@ const Index = () => (
     <AISoundsSection />
     <PricingSection />
     <FAQSection />
-    <ContactSection />
+    
     <FinalCTASection />
     <Footer />
   </>

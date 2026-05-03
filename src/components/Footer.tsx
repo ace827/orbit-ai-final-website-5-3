@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => (
   <footer className="py-10 border-t border-border/50 bg-background relative">
     <div className="absolute inset-0 bg-gradient-to-t from-primary/[0.02] to-transparent" />
@@ -12,8 +14,7 @@ const Footer = () => (
         </span>
       </div>
       <div className="flex gap-6 text-muted-foreground text-sm">
-        <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-        <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+        <Link to="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
       </div>
     </div>
   </footer>

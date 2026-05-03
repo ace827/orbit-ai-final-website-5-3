@@ -7,7 +7,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import WhySection from "@/components/WhySection";
 import IndustriesSection from "@/components/IndustriesSection";
 import AISoundsSection from "@/components/AISoundsSection";
-import PricingSection from "@/components/PricingSection";
+
 import FAQSection from "@/components/FAQSection";
 
 import FinalCTASection from "@/components/FinalCTASection";
@@ -24,7 +24,7 @@ const Index = () => (
     <WhySection />
     <IndustriesSection />
     <AISoundsSection />
-    <PricingSection />
+    
     <FAQSection />
     
     <FinalCTASection />

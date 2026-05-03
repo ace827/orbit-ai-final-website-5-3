@@ -206,16 +206,32 @@ const RevenueCalculatorSection = () => {
                     transition={{ duration: 0.35 }}
                     className="relative z-10 w-full"
                   >
-                    <div className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">
+                    <div className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                       Estimated Missed Revenue
                     </div>
-                    <div className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold text-primary leading-[1.05] tracking-tight">
-                      {formatCurrency(result.low)}
-                      <span className="text-foreground/30 mx-2 md:mx-3 font-light">–</span>
-                      {formatCurrency(result.high)}
+
+                    <div className="grid grid-cols-2 gap-3 sm:gap-5 mb-5">
+                      <div className="rounded-xl border border-border/60 bg-card/60 backdrop-blur-sm p-4 sm:p-5">
+                        <div className="text-[11px] font-semibold tracking-widest uppercase text-muted-foreground mb-1.5">
+                          Low estimate
+                        </div>
+                        <div className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-none tracking-tight tabular-nums whitespace-nowrap">
+                          {formatCurrency(result.low)}
+                        </div>
+                      </div>
+                      <div className="rounded-xl border border-primary/30 bg-primary/[0.06] p-4 sm:p-5">
+                        <div className="text-[11px] font-semibold tracking-widest uppercase text-primary/80 mb-1.5">
+                          High estimate
+                        </div>
+                        <div className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-primary leading-none tracking-tight tabular-nums whitespace-nowrap">
+                          {formatCurrency(result.high)}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-muted-foreground text-base font-medium mt-3">
-                      per month · based on a 20–40% conversion estimate
+
+                    <div className="text-muted-foreground text-sm font-medium">
+                      Per month · based on a 20–40% conversion estimate
                     </div>
 
                     {result.showRoi && (
@@ -223,13 +239,13 @@ const RevenueCalculatorSection = () => {
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.15, duration: 0.3 }}
-                        className="mt-8 pt-8 border-t border-border/60"
+                        className="mt-6 pt-6 border-t border-border/60 flex flex-wrap items-baseline gap-x-3 gap-y-1"
                       >
-                        <div className="font-heading text-2xl md:text-3xl font-bold text-foreground tracking-tight">
-                          {result.lowMult}x – {result.highMult}x your monthly investment
+                        <div className="font-heading text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight tabular-nums whitespace-nowrap">
+                          {result.lowMult}x–{result.highMult}x ROI
                         </div>
-                        <div className="text-foreground/70 text-base font-medium mt-2">
-                          Compared to $600/month with Orbit AI
+                        <div className="text-muted-foreground text-sm font-medium">
+                          vs. $600/month with Orbit AI
                         </div>
                       </motion.div>
                     )}
